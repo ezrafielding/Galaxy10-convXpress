@@ -21,7 +21,7 @@ if __name__ == "__main__":
     learningRateMetric = get_learning_rate_metric(optimizer)
     loss_function = CategoricalCrossentropy(from_logits=False)
 
-    model_checkpoint = ModelCheckpoint('Galaxy10_convXpress_'+str(learning_rate)+'_'+str(epochs)+'.h5', save_best_only=True, monitor='val_loss', mode='min')
+    model_checkpoint = ModelCheckpoint('./checkpoints/Galaxy10_convXpress_'+str(learning_rate)+'_'+str(epochs)+'.h5', save_best_only=True, monitor='val_loss', mode='min')
     reduce_learning_rate = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=3, min_lr=1e-10, min_delta=0.001,mode='min')
     tensorboard_callback = TensorBoard(log_dir="./logs")
     early_stop = EarlyStopping(restore_best_weights=True, patience=10)
