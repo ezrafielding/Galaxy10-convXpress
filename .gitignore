@@ -132,7 +132,4 @@ Galaxy10_DECals.h5
 *.csv
 logs
 checkpoints
-<<<<<<< HEAD
 model_save
-=======
->>>>>>> d386b353881378183587661db61a8fa8a34447b1
