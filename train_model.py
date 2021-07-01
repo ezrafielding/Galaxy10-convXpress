@@ -2,6 +2,7 @@ import tensorflow as tf
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.losses import CategoricalCrossentropy
 from tensorflow.keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, EarlyStopping, TensorBoard
+import datetime
 from data_utils import get_data
 from build_model import get_model
 
@@ -23,7 +24,8 @@ if __name__ == "__main__":
 
     model_checkpoint = ModelCheckpoint('./checkpoints/Galaxy10_convXpress_'+str(learning_rate)+'_'+str(epochs)+'.h5', save_best_only=True, monitor='val_loss', mode='min')
     reduce_learning_rate = ReduceLROnPlateau(monitor='val_loss', factor=0.5, patience=3, min_lr=1e-10, min_delta=0.001,mode='min')
-    tensorboard_callback = TensorBoard(log_dir="./logs")
+    log_dir="./logs/fit/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    tensorboard_callback = TensorBoard(log_dir=log_dir, histogram_freq=1)
     early_stop = EarlyStopping(restore_best_weights=True, patience=10)
 
     model = get_model(rnd_seed)
