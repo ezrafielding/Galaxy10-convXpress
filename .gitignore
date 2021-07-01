@@ -129,3 +129,7 @@ dmypy.json
 .pyre/
 
 Galaxy10_DECals.h5
+*.csv
+logs
+checkpoints
+model_save
