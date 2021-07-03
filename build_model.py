@@ -4,7 +4,7 @@ from tensorflow.keras.layers import Conv2D, Dense, Dropout, Flatten, MaxPooling2
 from define_models import augLayers, convXpress
 
 def get_model(rnd_seed):
-    """Builds the ML MOdel.
+    """Builds the ML Model.
 
     Args:
         rnd_seed: Seed for the random functions.
