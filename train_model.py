@@ -7,6 +7,14 @@ from data_utils import get_data
 from build_model import get_model
 
 def get_learning_rate_metric(optimizer):
+    """Gets the learning rate metric.
+
+    Args:
+        optomizer: The optimizer for the model.
+
+    Returns:
+        The current learning rate metric.
+    """
     def lr(y_true, y_pred):
         return optimizer.lr
     return lr

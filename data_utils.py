@@ -4,6 +4,14 @@ import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
 def get_data_from_h5(filename):
+    """Gets Data from Galaxy10 h5 file.
+
+    Args:
+        filename: Path to file.
+
+    Returns:
+        images and labels as numpy arrays.
+    """
     with h5py.File(filename, 'r') as f:
         # Get images
         images = np.array(f['images'])
@@ -14,6 +22,15 @@ def get_data_from_h5(filename):
     return images, labels
 
 def test_train_split(images, labels):
+    """Splits dataset into test and training sets.
+
+    Args:
+        images: Array of image data.
+        labels: Array of label data
+
+    Returns:
+        Image and Label Train and Test datasets.
+    """
     # Get Train/Test Split
     train_idx, test_idx = train_test_split(np.arange(labels.shape[0]), test_size=0.2)
     # Save Train and Test Indexes
@@ -22,6 +39,14 @@ def test_train_split(images, labels):
     return images[train_idx], labels[train_idx], images[test_idx], labels[test_idx]
 
 def image_prep(x):
+    """Pre-processes Images.
+
+    Args:
+        x: Dictionary containing image and label.
+
+    Returns:
+        augmented image and label.
+    """
     # Convert Images to tf.float32 data type
     image = tf.cast(x['image'], tf.float32)
     # Normalize pixel values
@@ -37,6 +62,17 @@ def image_prep(x):
     return aug_image, x['label']
 
 def make_tf_Dataset(train_images, train_labels, test_images, test_labels):
+    """Packs data into a tensorflow dataset.
+
+    Args:
+        train_images: Images used for training.
+        train_labels: Labels used for training.
+        test_images: Images used for testing.
+        test_lables: Labels used for testing.
+
+    Returns:
+        Train and Test tensorflow datasets.
+    """
     # Pack Images and Labels into dataset
     train = tf.data.Dataset.from_tensor_slices({"image":train_images, "label":train_labels})
     test = tf.data.Dataset.from_tensor_slices({"image":test_images, "label":test_labels})
@@ -52,6 +88,14 @@ def make_tf_Dataset(train_images, train_labels, test_images, test_labels):
     return train,test
 
 def get_data(filename):
+    """Gets the dataset data.
+
+    Args:
+        filename: Path to dataset file.
+
+    Returns:
+        Train and Test tensorflow datasets.
+    """
     # Fetch Images and labels
     images, labels = get_data_from_h5(filename)
     # Get Train/Test Split

@@ -4,6 +4,14 @@ from tensorflow.keras.layers import Conv2D, Dense, Dropout, Flatten, MaxPooling2
 from define_models import augLayers, convXpress
 
 def get_model(rnd_seed):
+    """Builds the ML MOdel.
+
+    Args:
+        rnd_seed: Seed for the random functions.
+
+    Returns:
+        The ML Model.
+    """
     # Make new sequential model
     model = Sequential()
     # Add Input Layer
